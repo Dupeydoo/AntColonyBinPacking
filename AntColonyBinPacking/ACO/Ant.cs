@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AntColonyBinPacking
+namespace AntColonyBinPacking.ACO
 {
-    class Program
+    class Ant
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }

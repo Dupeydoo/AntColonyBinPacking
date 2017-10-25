@@ -42,7 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="ACO\ACORunner.cs" />
+    <Compile Include="ACO\Ant.cs" />
+    <Compile Include="ACO\BinNode.cs" />
+    <Compile Include="ACO\Edge.cs" />
+    <Compile Include="ACO\Enumerations\BinProblems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
