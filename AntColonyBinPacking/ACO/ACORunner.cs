@@ -15,7 +15,7 @@ namespace AntColonyBinPacking
         public static void Main(string[] args)
         {
             List<double> inputItems = new List<double>();
-            InitialiseInputItems(inputItems, (int)BinProblemsEnum.BPP2);
+            InitialiseInputItems(inputItems, (int)BinProblemsEnum.BPP1);
             Console.ReadLine();   //Ensures the terminal window remains open.
         }
 

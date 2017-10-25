@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AntColonyBinPacking.ACO
 {
-    class BinNode
+    public class BinNode
     {
     }
 }

@@ -47,6 +47,7 @@
     <Compile Include="ACO\BinNode.cs" />
     <Compile Include="ACO\Edge.cs" />
     <Compile Include="ACO\Enumerations\BinProblems.cs" />
+    <Compile Include="ACO\Interfaces\IGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
