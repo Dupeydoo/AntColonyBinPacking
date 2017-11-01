@@ -24,7 +24,8 @@ namespace AntColonyBinPacking
 
             IConstructionGraph binGraph = new ConstructionGraph
             {
-                BinLevels = BinAmount
+                BinLevels = BinAmount,
+                GraphEdges = edges
             };
 
             Console.ReadLine();   //Ensures the terminal window remains open.
