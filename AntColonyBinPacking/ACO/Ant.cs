@@ -16,5 +16,11 @@ namespace AntColonyBinPacking.ACO
         public int AntId { get; set; }
         public int CurrentItem { get; set; }
         public Stack<Edge> EdgesVisited { get; set; }
+
+        public void MakeChoice(List<Edge> choiceSet)
+        {
+            int select = new Random().Next(choiceSet.Count);   // bias this selection
+            this.EdgesVisited.Push(choiceSet[select]);
+        }
     }
 }

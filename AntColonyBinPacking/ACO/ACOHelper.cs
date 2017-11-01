@@ -31,36 +31,47 @@ namespace AntColonyBinPacking.ACO
 
         // Generate random ant paths ergo intialise after edges and graph are done and modify the ants stacks with a random selection
         // of the edges
-        internal static HashSet<Ant> InitialiseAnts(int antPaths)
+        internal static HashSet<Ant> InitialiseAnts(int antPaths, List<Edge> edges, int binNumber)
         {
             HashSet<Ant> ants = new HashSet<Ant>();
+            int startIndex = 0;
             for (int path = 1; path <= antPaths; path++)
             {
-                ants.Add
-                (
-                    new Ant
-                    {
-                        AntId = path
-                    }
-                );
+                List<Edge> choiceSet = new List<Edge>();
+                Ant ant = new Ant { AntId = path };
+
+                for(int edge=startIndex; edge < binNumber; edge++)
+                {
+                    choiceSet.Add(edges[edge]);
+                }
+
+                ant.MakeChoice(choiceSet);
+                ants.Add(ant);
+                startIndex += binNumber;
             }
             return ants;
         }
 
-        internal static List<Edge> InitialiseEdges(int edgeFactor)
+        internal static List<Edge> InitialiseEdges(int edgeFactor, int binNumber)
         {
             List<Edge> edges = new List<Edge>();
             Random pheremoneGen = new Random();           // Random constructor takes the seed from the current time, so will be different for each run
-            for(int ef = 0; ef < edgeFactor; ef++)
+            int binCounter = 1;
+
+            for(int ef = 1; ef <= edgeFactor; ef++)
             {
                 edges.Add
                 (
                     new Edge
                     {
-                        EdgeId = ef + 1,
-                        PheromoneValue = GenerateRandomDouble(pheremoneGen) // TODO shitty way to get the bin connected right
+                        EdgeId = ef,
+                        PheromoneValue = GenerateRandomDouble(pheremoneGen),
+                        EndNode_BinNumber = binCounter
                     }
                 );
+
+                if ((binCounter % binNumber) == 0) binCounter = 0;
+                binCounter++;
             }
             return edges;
         }
