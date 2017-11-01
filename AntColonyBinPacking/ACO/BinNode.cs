@@ -8,5 +8,6 @@ namespace AntColonyBinPacking.ACO
 {
     public class BinNode
     {
+
     }
 }

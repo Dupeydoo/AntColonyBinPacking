@@ -4,42 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AntColonyBinPacking.ACO.Enumerations;
+using AntColonyBinPacking.ACO.Interfaces;
+using AntColonyBinPacking.ACO;
 
 namespace AntColonyBinPacking
 {
     class ACORunner
     {
-        public int BinAmount { get; set; }
+        public static readonly int BinAmount = 10;
+        public static readonly double EvaporationRate = 0.9;
+        public static readonly int AntPaths = 10;
 
         // First test 10 ant paths so 10 ants, 0.9 eval, 500 random items weight at i into 10 bins
         public static void Main(string[] args)
         {
             List<double> inputItems = new List<double>();
-            InitialiseInputItems(inputItems, (int)BinProblemsEnum.BPP1);
+            ACOHelper.InitialiseInputItems(inputItems, (int)BinProblemsEnum.BPP1);
+
+            IConstructionGraph binGraph = new ConstructionGraph
+            {
+                BinLevels = BinAmount
+            };
+
             Console.ReadLine();   //Ensures the terminal window remains open.
-        }
-
-        private static void InitialiseInputItems(List<double> inputs, int binPackingProblem)
-        {
-            if(binPackingProblem == 0)
-            {
-                for (int item = 1; item <= 500; item++)
-                {
-                    inputs.Add(item);
-                    Console.Write("{0} ", item);
-                }
-            }
-
-            else if(binPackingProblem == 1)
-            {
-                for(int item = 1; item <= 500; item++)
-                {
-                    double outputItem = Math.Pow(item, 2) / 2;
-                    inputs.Add(outputItem);
-                    Console.Write("{0} ", outputItem);
-                }
-            }
-            
         }
     }
 }
