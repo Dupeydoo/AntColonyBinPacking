@@ -20,6 +20,7 @@ namespace AntColonyBinPacking
         {
             List<double> inputItems = new List<double>();
             ACOHelper.InitialiseInputItems(inputItems, (int)BinProblemsEnum.BPP1);
+            List<Edge> edges = ACOHelper.InitialiseEdges(BinAmount * inputItems.Count);
 
             IConstructionGraph binGraph = new ConstructionGraph
             {

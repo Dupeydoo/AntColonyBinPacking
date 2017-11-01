@@ -46,5 +46,29 @@ namespace AntColonyBinPacking.ACO
             }
             return ants;
         }
+
+        internal static List<Edge> InitialiseEdges(int edgeFactor)
+        {
+            List<Edge> edges = new List<Edge>();
+            Random pheremoneGen = new Random();           // Random constructor takes the seed from the current time, so will be different for each run
+            for(int ef = 0; ef < edgeFactor; ef++)
+            {
+                edges.Add
+                (
+                    new Edge
+                    {
+                        EdgeId = ef + 1,
+                        PheromoneValue = GenerateRandomDouble(pheremoneGen) // TODO shitty way to get the bin connected right
+                    }
+                );
+            }
+            return edges;
+        }
+
+        private static double GenerateRandomDouble(Random random)
+        {
+            double rand = random.Next();
+            return 1 - (rand / int.MaxValue);
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace AntColonyBinPacking.ACO
     public class Edge
     {
         public int EdgeId { get; set; }
-        public int PheromoneValue { get; set; }
+        public double PheromoneValue { get; set; }
         public int EndNode_BinNumber { get; set; }
     }
 }
