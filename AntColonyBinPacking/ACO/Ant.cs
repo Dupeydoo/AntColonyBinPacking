@@ -18,26 +18,28 @@ namespace AntColonyBinPacking.ACO
         public Stack<Edge> EdgesVisited { get; set; }
         public double AntFitness { get; set; }
 
-        public void MakeChoice(List<Edge> decisionSet, Random random)
+        public void MakeChoice(List<Edge> decisionSet, Random random, double weight, double[] binWeights)
         {
             double probabilitySum = decisionSet.Sum(x => x.PheromoneValue);
             double randDouble = random.NextDouble() * probabilitySum;
             double total = 0;
 
-            foreach(Edge edge in decisionSet)
+            for(int edge=0; edge < decisionSet.Count; edge++)
             {
-                double edgeProbability = edge.PheromoneValue;
+                Edge checkEdge = decisionSet[edge];
+                double edgeProbability = checkEdge.PheromoneValue;
                 total += edgeProbability;
                 if(randDouble <= total)
                 {
-                    Edge chosenEdge = edge;
+                    Edge chosenEdge = checkEdge;
+                    binWeights[edge] += weight;
                     this.EdgesVisited.Push(chosenEdge);
                     break;
                 }
             }      
         }
 
-        public void CalculateAntFitness(List<double> binWeights)
+        public void CalculateAntFitness(double[] binWeights)
         {
             this.AntFitness = binWeights.Max() - binWeights.Min();
         }

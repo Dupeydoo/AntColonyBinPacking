@@ -10,15 +10,9 @@ namespace AntColonyBinPacking.ACO
 {
     class ConstructionGraph : IConstructionGraph
     {
-        public ConstructionGraph()
-        {
-            this.BinWeights = new List<double>();
-        }
-
         public int BinLevels { get; set; }
-        // public int BinNodeCount { get; set; }
-        public List<double> BinWeights { get; set; }
-        public List<List<Edge>> GraphEdges { get; set; }
+        public double[] BinWeights { get; set; }
+        public List<List<Edge>> GraphDecisionEdges { get; set; }
 
         public double GetFitness(List<double> BinWeights)
         {

@@ -34,10 +34,10 @@ namespace AntColonyBinPacking.ACO
         // of the edges
         internal static HashSet<Ant> InitialiseAnts(int antPaths, IConstructionGraph graph, int binNumber, List<double> inputItems)
         {
-            List<List<Edge>> edges = graph.GraphEdges;
+            List<List<Edge>> edges = graph.GraphDecisionEdges;
             HashSet<Ant> ants = new HashSet<Ant>();
             Random random = new Random();
-            PopulateAnts(antPaths, edges, random, ants);
+            PopulateAnts(antPaths, edges, random, ants, inputItems, graph.BinWeights);
             return ants;
         }
 
@@ -71,16 +71,18 @@ namespace AntColonyBinPacking.ACO
             }
         }
 
-        private static void PopulateAnts(int antPaths, List<List<Edge>> edges, Random random, HashSet<Ant> ants)
+        private static void PopulateAnts(int antPaths, List<List<Edge>> edges, Random random, 
+            HashSet<Ant> ants, List<double> inputItems, double[] binWeights)
         {
             int path = 1;
             while (path <= antPaths)
             {
                 Ant ant = new Ant { AntId = path };
 
-                foreach (List<Edge> decisionSet in edges)
+                for(int edge=0; edge < edges.Count; edge++)
                 {
-                    ant.MakeChoice(decisionSet, random);
+                    double item = inputItems[edge];
+                    ant.MakeChoice(edges[edge], random, item, binWeights);
                 }
                 ants.Add(ant);
                 path++;
