@@ -12,6 +12,7 @@ namespace AntColonyBinPacking.ACO.Interfaces
         int BinLevels { get; set; }                     
         double[] BinWeights { get; set; }          
         List<List<Edge>> GraphDecisionEdges { get; set; }
-        double GetFitness(List<double> BinWeights);    
+        double GetFitness(List<double> BinWeights);
+        void ClearWeights();
     }
 }

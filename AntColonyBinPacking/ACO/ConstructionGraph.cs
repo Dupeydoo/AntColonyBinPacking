@@ -18,5 +18,10 @@ namespace AntColonyBinPacking.ACO
         {
             return 4;
         }
+
+        public void ClearWeights()
+        {
+            Array.Clear(this.BinWeights, 0, BinWeights.Length);
+        }
     }
 }

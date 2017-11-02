@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AntColonyBinPacking.ACO.ACOCommon
 {
-    public class AntMaths
+    public static class AntMaths
     {
         public static double GenerateRandomDouble(Random random)
         {

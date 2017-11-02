@@ -37,7 +37,7 @@ namespace AntColonyBinPacking.ACO
             List<List<Edge>> edges = graph.GraphDecisionEdges;
             HashSet<Ant> ants = new HashSet<Ant>();
             Random random = new Random();
-            PopulateAnts(antPaths, edges, random, ants, inputItems, graph.BinWeights);
+            PopulateAnts(antPaths, edges, random, ants, inputItems, graph);
             return ants;
         }
 

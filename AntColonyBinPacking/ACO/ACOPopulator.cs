@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AntColonyBinPacking.ACO.ACOCommon;
+using AntColonyBinPacking.ACO.Interfaces;
 
 namespace AntColonyBinPacking.ACO
 {
@@ -32,7 +33,7 @@ namespace AntColonyBinPacking.ACO
         }
 
         private static void PopulateAnts(int antPaths, List<List<Edge>> edges, Random random,
-            HashSet<Ant> ants, List<double> inputItems, double[] binWeights)
+            HashSet<Ant> ants, List<double> inputItems, IConstructionGraph graph)
         {
             int path = 1;
             while (path <= antPaths)
@@ -42,9 +43,10 @@ namespace AntColonyBinPacking.ACO
                 for (int edge = 0; edge < edges.Count; edge++)
                 {
                     double item = inputItems[edge];
-                    ant.MakeChoice(edges[edge], random, item, binWeights);
+                    ant.MakeChoice(edges[edge], random, item, graph.BinWeights);
                 }
                 ants.Add(ant);
+                graph.ClearWeights();
                 path++;
             }
         }
