@@ -33,8 +33,9 @@ namespace AntColonyBinPacking
 
             while(loopCounter <= FITNESS_EVALUATIONS)
             {
-               HashSet<Ant> ants = ACOHelper.InitialiseAnts(ANT_PATHS, binGraph, BIN_AMOUNT, inputItems);
-               binGraph.UpdatePheromones();
+                HashSet<Ant> ants = ACOHelper.InitialiseAnts(ANT_PATHS, binGraph, BIN_AMOUNT, inputItems);
+                binGraph.UpdatePheromones(ants);
+                loopCounter++;
             }
             
             Console.ReadLine();  //Ensures the terminal window remains open.

@@ -13,6 +13,7 @@ namespace AntColonyBinPacking.ACO
     {
         private static void PopulateEdges(List<List<Edge>> edges, int inputCount, int binNumber, Random random)
         {
+            int idCounter = 0;
             for (int item = 0; item < inputCount; item++)
             {
                 List<Edge> decision = new List<Edge>();
@@ -22,12 +23,13 @@ namespace AntColonyBinPacking.ACO
                     (
                         new Edge
                         {
-                            EdgeId = binCount,
+                            EdgeId = binCount + idCounter,
                             PheromoneValue = AntMaths.GenerateRandomDouble(random),
                             EndNode_BinNumber = binCount
                         }
                     );
                 }
+                idCounter += binNumber;
                 edges.Add(decision);
             }
         }
@@ -46,7 +48,6 @@ namespace AntColonyBinPacking.ACO
                     ant.MakeChoice(edges[edge], random, item, graph.BinWeights);
                 }
                 ant.CalculateAntFitness(graph.BinWeights);
-                graph.UpdatePheromones(ant.EdgesVisited, ant.AntFitness);
                 ants.Add(ant);
 
                 graph.ClearBinWeights();
