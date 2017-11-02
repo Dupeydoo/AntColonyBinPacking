@@ -42,10 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ACO\ACOCommon\AntMaths.cs" />
     <Compile Include="ACO\ACOHelper.cs" />
+    <Compile Include="ACO\ACOPopulator.cs" />
     <Compile Include="ACO\ACORunner.cs" />
     <Compile Include="ACO\Ant.cs" />
-    <Compile Include="ACO\BinNode.cs" />
     <Compile Include="ACO\ConstructionGraph.cs" />
     <Compile Include="ACO\Edge.cs" />
     <Compile Include="ACO\Enumerations\BinProblems.cs" />

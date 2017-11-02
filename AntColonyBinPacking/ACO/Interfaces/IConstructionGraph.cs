@@ -9,10 +9,9 @@ namespace AntColonyBinPacking.ACO.Interfaces
 {
     public interface IConstructionGraph
     {
-        // On initial setup the graphs bin weights are intitalised in chornology to the input bins.
-        int BinLevels { get; set; }                     // Amount of different bins giving the levels of the graph.
-        double[] BinWeights { get; set; }          // When an ant reaches a BinNode, the BinNode reports to the graph and updates the total bin weight for a bin.
+        int BinLevels { get; set; }                     
+        double[] BinWeights { get; set; }          
         List<List<Edge>> GraphDecisionEdges { get; set; }
-        double GetFitness(List<double> BinWeights);    // A method to return the fitness of an ant run using difference between max and min bin weights.
+        double GetFitness(List<double> BinWeights);    
     }
 }

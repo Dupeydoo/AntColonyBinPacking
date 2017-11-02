@@ -31,7 +31,7 @@ namespace AntColonyBinPacking
 
             HashSet<Ant> ants = ACOHelper.InitialiseAnts(AntPaths, binGraph, BinAmount, inputItems);
 
-            Console.ReadLine();   //Ensures the terminal window remains open.
+            Console.ReadLine();  //Ensures the terminal window remains open.
         }
     }
 }
