@@ -11,7 +11,7 @@ namespace AntColonyBinPacking
 {
     class ACORunner
     {
-        public static readonly int BinAmount = 50;
+        public static readonly int BinAmount = 10;
         public static readonly double EvaporationRate = 0.9;
         public static readonly int AntPaths = 10;
 
@@ -20,13 +20,15 @@ namespace AntColonyBinPacking
         {
             List<double> inputItems = new List<double>();
             ACOHelper.InitialiseInputItems(inputItems, (int)BinProblemsEnum.BPP1);
-            List<Edge> edges = ACOHelper.InitialiseEdges(BinAmount * inputItems.Count, BinAmount);
+            List<List<Edge>> edges = ACOHelper.InitialiseEdges(inputItems.Count, BinAmount);
 
             IConstructionGraph binGraph = new ConstructionGraph
             {
                 BinLevels = BinAmount,
                 GraphEdges = edges
             };
+
+            HashSet<Ant> ants = ACOHelper.InitialiseAnts(AntPaths, binGraph, BinAmount);
 
             Console.ReadLine();   //Ensures the terminal window remains open.
         }

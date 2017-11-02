@@ -18,7 +18,7 @@ namespace AntColonyBinPacking.ACO
         public int BinLevels { get; set; }
         // public int BinNodeCount { get; set; }
         public List<double> BinWeights { get; set; }
-        public List<Edge> GraphEdges { get; set; }
+        public List<List<Edge>> GraphEdges { get; set; }
 
         public double GetFitness(List<double> BinWeights)
         {

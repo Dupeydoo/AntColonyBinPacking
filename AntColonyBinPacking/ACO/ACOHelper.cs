@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AntColonyBinPacking.ACO.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,49 +32,59 @@ namespace AntColonyBinPacking.ACO
 
         // Generate random ant paths ergo intialise after edges and graph are done and modify the ants stacks with a random selection
         // of the edges
-        internal static HashSet<Ant> InitialiseAnts(int antPaths, List<Edge> edges, int binNumber)
+        internal static HashSet<Ant> InitialiseAnts(int antPaths, IConstructionGraph graph, int binNumber, List<double> inputItems)
         {
+            List<List<Edge>> edges = graph.GraphEdges;
             HashSet<Ant> ants = new HashSet<Ant>();
-            int startIndex = 0;
-            for (int path = 1; path <= antPaths; path++)
-            {
-                List<Edge> choiceSet = new List<Edge>();
-                Ant ant = new Ant { AntId = path };
-
-                for(int edge=startIndex; edge < binNumber; edge++)
-                {
-                    choiceSet.Add(edges[edge]);
-                }
-
-                ant.MakeChoice(choiceSet);
-                ants.Add(ant);
-                startIndex += binNumber;
-            }
+            Random random = new Random();
+            PopulateAnts(antPaths, edges, random, ants);
             return ants;
         }
 
-        internal static List<Edge> InitialiseEdges(int edgeFactor, int binNumber)
+        internal static List<List<Edge>> InitialiseEdges(int inputCount, int binNumber)
         {
-            List<Edge> edges = new List<Edge>();
-            Random pheremoneGen = new Random();           // Random constructor takes the seed from the current time, so will be different for each run
-            int binCounter = 1;
-
-            for(int ef = 1; ef <= edgeFactor; ef++)
-            {
-                edges.Add
-                (
-                    new Edge
-                    {
-                        EdgeId = ef,
-                        PheromoneValue = GenerateRandomDouble(pheremoneGen),
-                        EndNode_BinNumber = binCounter
-                    }
-                );
-
-                if ((binCounter % binNumber) == 0) binCounter = 0;
-                binCounter++;
-            }
+            List<List<Edge>> edges = new List<List<Edge>>();
+            // Random constructor takes the seed from the current time, so will be different for each run
+            Random pheremoneGen = new Random();           
+            PopulateEdges(edges, inputCount, binNumber, pheremoneGen);
             return edges;
+        }
+
+        private static void PopulateEdges(List<List<Edge>> edges, int inputCount, int binNumber, Random random)
+        {
+            for(int item=0; item < inputCount; item++)
+            {
+                List<Edge> decision = new List<Edge>();
+                for(int binCount=1; binCount <= binNumber; binCount++)
+                {
+                    decision.Add
+                    (
+                        new Edge
+                        {
+                            EdgeId = binCount,
+                            PheromoneValue = GenerateRandomDouble(random),
+                            EndNode_BinNumber = binCount
+                        }
+                    );
+                }
+                edges.Add(decision);
+            }
+        }
+
+        private static void PopulateAnts(int antPaths, List<List<Edge>> edges, Random random, HashSet<Ant> ants)
+        {
+            int path = 1;
+            while (path <= antPaths)
+            {
+                Ant ant = new Ant { AntId = path };
+
+                foreach (List<Edge> decisionSet in edges)
+                {
+                    ant.MakeChoice(decisionSet, random);
+                }
+                ants.Add(ant);
+                path++;
+            }
         }
 
         private static double GenerateRandomDouble(Random random)
