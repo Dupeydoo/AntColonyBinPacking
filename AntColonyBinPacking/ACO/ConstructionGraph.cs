@@ -28,8 +28,8 @@ namespace AntColonyBinPacking.ACO
                 foreach (Edge edge in ant.EdgesVisited)
                 {
                     edge.PheromoneValue += pheromone;
-                    int edgeIndex = edge.EdgeId - 1;
-                    this.GraphDecisionEdges[edgeIndex / BinLevels][edge.EndNode_BinNumber] = edge;
+                    //int edgeIndex = edge.EdgeId - 1;
+                    //this.GraphDecisionEdges[edgeIndex / BinLevels][edge.EndNode_BinNumber] = edge;
                 }
             }
         }

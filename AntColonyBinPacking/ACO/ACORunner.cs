@@ -35,7 +35,7 @@ namespace AntColonyBinPacking
             while(loopCounter <= FITNESS_EVALUATIONS)
             {
                 ants = ACOHelper.InitialiseAnts(ANT_PATHS, binGraph, BIN_AMOUNT, inputItems);
-                //binGraph.UpdatePheromones(ants);
+                binGraph.UpdatePheromones(ants);
                 loopCounter++;
             }
             
