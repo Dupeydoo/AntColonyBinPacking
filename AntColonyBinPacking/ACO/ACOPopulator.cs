@@ -45,7 +45,9 @@ namespace AntColonyBinPacking.ACO
                     double item = inputItems[edge];
                     ant.MakeChoice(edges[edge], random, item, graph.BinWeights);
                 }
+                ant.CalculateAntFitness(graph.BinWeights);
                 ants.Add(ant);
+
                 graph.ClearWeights();
                 path++;
             }
