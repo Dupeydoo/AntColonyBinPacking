@@ -22,21 +22,16 @@ namespace AntColonyBinPacking.ACO
 
         public void UpdatePheromones(HashSet<Ant> ants)
         {
-            List<Edge> visitedEdges = this.CollapseAntStacks(ants);
-            foreach(List<Edge> edges in this.GraphDecisionEdges)
-            {
-
-            }
-        }
-
-        private List<Edge> CollapseAntStacks(HashSet<Ant> ants)
-        {
-            List<Edge> visitedEdges = new List<Edge>();
             foreach(Ant ant in ants)
             {
-                visitedEdges = visitedEdges.Concat(ant.EdgesVisited).ToList();
+                double pheromone = AntMaths.CalculatePheromoneLay(AntMaths.PHEROMONE_UPDATE_CONSTANT, ant.AntFitness);
+                foreach (Edge edge in ant.EdgesVisited)
+                {
+                    edge.PheromoneValue += pheromone;
+                    int edgeIndex = edge.EdgeId - 1;
+                    this.GraphDecisionEdges[edgeIndex / BinLevels][edge.EndNode_BinNumber] = edge;
+                }
             }
-            return visitedEdges;
         }
     }
 }

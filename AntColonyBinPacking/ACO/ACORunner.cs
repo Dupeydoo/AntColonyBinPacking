@@ -22,6 +22,7 @@ namespace AntColonyBinPacking
             List<double> inputItems = new List<double>();
             ACOHelper.InitialiseInputItems(inputItems, (int)BinProblemsEnum.BPP1);
             List<List<Edge>> edges = ACOHelper.InitialiseEdges(inputItems.Count, BIN_AMOUNT);
+            HashSet<Ant> ants;
             byte loopCounter = 1;
 
             IConstructionGraph binGraph = new ConstructionGraph
@@ -33,8 +34,8 @@ namespace AntColonyBinPacking
 
             while(loopCounter <= FITNESS_EVALUATIONS)
             {
-                HashSet<Ant> ants = ACOHelper.InitialiseAnts(ANT_PATHS, binGraph, BIN_AMOUNT, inputItems);
-                binGraph.UpdatePheromones(ants);
+                ants = ACOHelper.InitialiseAnts(ANT_PATHS, binGraph, BIN_AMOUNT, inputItems);
+                //binGraph.UpdatePheromones(ants);
                 loopCounter++;
             }
             
