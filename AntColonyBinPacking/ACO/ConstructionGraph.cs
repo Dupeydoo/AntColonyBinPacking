@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AntColonyBinPacking.ACO.Interfaces;
+using AntColonyBinPacking.ACO.ACOCommon;
 
 namespace AntColonyBinPacking.ACO
 {
@@ -14,14 +15,14 @@ namespace AntColonyBinPacking.ACO
         public double[] BinWeights { get; set; }
         public List<List<Edge>> GraphDecisionEdges { get; set; }
 
-        public double GetFitness(List<double> BinWeights)
-        {
-            return 4;
-        }
-
-        public void ClearWeights()
+        public void ClearBinWeights()
         {
             Array.Clear(this.BinWeights, 0, BinWeights.Length);
+        }
+
+        public void UpdatePheromones(HashSet<Ant> ants)
+        {
+
         }
     }
 }

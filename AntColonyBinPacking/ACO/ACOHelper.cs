@@ -34,10 +34,10 @@ namespace AntColonyBinPacking.ACO
         // of the edges
         internal static HashSet<Ant> InitialiseAnts(int antPaths, IConstructionGraph graph, int binNumber, List<double> inputItems)
         {
-            List<List<Edge>> edges = graph.GraphDecisionEdges;
+            
             HashSet<Ant> ants = new HashSet<Ant>();
             Random random = new Random();
-            PopulateAnts(antPaths, edges, random, ants, inputItems, graph);
+            PopulateAnts(antPaths, random, ants, inputItems, graph);
             return ants;
         }
 

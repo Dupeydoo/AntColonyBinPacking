@@ -11,26 +11,32 @@ namespace AntColonyBinPacking
 {
     class ACORunner
     {
-        public static readonly int BinAmount = 10;
-        public static readonly double EvaporationRate = 0.9;
-        public static readonly int AntPaths = 10;
+        public static readonly int BIN_AMOUNT = 10;
+        public static readonly double EVAPORATION_RATE = 0.9;
+        public static readonly int ANT_PATHS = 10;
+        public static readonly byte FITNESS_EVALUATIONS = 100;
 
         // First test 10 ant paths so 10 ants, 0.9 eval, 500 random items weight at i into 10 bins
         public static void Main(string[] args)
         {
             List<double> inputItems = new List<double>();
             ACOHelper.InitialiseInputItems(inputItems, (int)BinProblemsEnum.BPP1);
-            List<List<Edge>> edges = ACOHelper.InitialiseEdges(inputItems.Count, BinAmount);
+            List<List<Edge>> edges = ACOHelper.InitialiseEdges(inputItems.Count, BIN_AMOUNT);
+            byte loopCounter = 1;
 
             IConstructionGraph binGraph = new ConstructionGraph
             {
-                BinLevels = BinAmount,
+                BinLevels = BIN_AMOUNT,
                 GraphDecisionEdges = edges,
-                BinWeights = new double[BinAmount]
+                BinWeights = new double[BIN_AMOUNT]
             };
 
-            HashSet<Ant> ants = ACOHelper.InitialiseAnts(AntPaths, binGraph, BinAmount, inputItems);
-
+            while(loopCounter <= FITNESS_EVALUATIONS)
+            {
+               HashSet<Ant> ants = ACOHelper.InitialiseAnts(ANT_PATHS, binGraph, BIN_AMOUNT, inputItems);
+               binGraph.UpdatePheromones();
+            }
+            
             Console.ReadLine();  //Ensures the terminal window remains open.
         }
     }

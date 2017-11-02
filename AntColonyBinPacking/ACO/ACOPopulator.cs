@@ -32,11 +32,11 @@ namespace AntColonyBinPacking.ACO
             }
         }
 
-        private static void PopulateAnts(int antPaths, List<List<Edge>> edges, Random random,
+        private static void PopulateAnts(int antPaths, Random random,
             HashSet<Ant> ants, List<double> inputItems, IConstructionGraph graph)
         {
-            int path = 1;
-            while (path <= antPaths)
+            List<List<Edge>> edges = graph.GraphDecisionEdges;
+            for (int path = 1; path <= antPaths; path++)
             {
                 Ant ant = new Ant { AntId = path };
 
@@ -46,10 +46,10 @@ namespace AntColonyBinPacking.ACO
                     ant.MakeChoice(edges[edge], random, item, graph.BinWeights);
                 }
                 ant.CalculateAntFitness(graph.BinWeights);
+                graph.UpdatePheromones(ant.EdgesVisited, ant.AntFitness);
                 ants.Add(ant);
 
-                graph.ClearWeights();
-                path++;
+                graph.ClearBinWeights();
             }
         }
     }
