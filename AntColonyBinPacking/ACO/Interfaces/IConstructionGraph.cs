@@ -13,6 +13,6 @@ namespace AntColonyBinPacking.ACO.Interfaces
         double[] BinWeights { get; set; }          
         List<List<Edge>> GraphDecisionEdges { get; set; }
         void ClearBinWeights();
-        void UpdatePheromones(HashSet<Ant> ants);
+        void UpdatePheromones(HashSet<Ant> ants, double evaporationRate);
     }
 }
