@@ -14,7 +14,7 @@ namespace AntColonyBinPacking
         public static readonly int BIN_AMOUNT = 10;
         public static readonly double EVAPORATION_RATE = 0.9;
         public static readonly int ANT_PATHS = 10;
-        public static readonly byte FITNESS_EVALUATIONS = 100;
+        public static readonly short FITNESS_EVALUATIONS_LIMIT = 10000;
 
         // First test 10 ant paths so 10 ants, 0.9 eval, 500 random items weight at i into 10 bins
         public static void Main(string[] args)
@@ -32,7 +32,7 @@ namespace AntColonyBinPacking
                 BinWeights = new double[BIN_AMOUNT]
             };
 
-            while(loopCounter <= FITNESS_EVALUATIONS)
+            while(loopCounter <= (FITNESS_EVALUATIONS_LIMIT / ANT_PATHS))
             {
                 ants = ACOHelper.InitialiseAnts(ANT_PATHS, binGraph, BIN_AMOUNT, inputItems);
                 binGraph.UpdatePheromones(ants);
