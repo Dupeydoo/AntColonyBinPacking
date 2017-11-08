@@ -19,5 +19,16 @@ namespace AntColonyBinPacking.ACO.ACOCommon
         {
             return constant / antFitness;
         }
+
+        public static double ReturnBestFitness(HashSet<Ant> ants)
+        {
+            double min = Double.MaxValue;
+            foreach(Ant ant in ants)
+            {
+                double fitness = ant.AntFitness;
+                if (fitness < min) min = fitness;
+            }
+            return min;
+        }
     }
 }
