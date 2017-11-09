@@ -7,6 +7,7 @@ using AntColonyBinPacking.ACO.Enumerations;
 using AntColonyBinPacking.ACO.Interfaces;
 using AntColonyBinPacking.ACO.ACOCommon;
 using AntColonyBinPacking.ACO;
+using System.Diagnostics;
 
 namespace AntColonyBinPacking
 {
@@ -15,14 +16,14 @@ namespace AntColonyBinPacking
     /// of the Bin Packing Problem.Items of different weights
     /// are inputted into the algorithm and ants help to distribute
     /// these items into a fixed number of bins so that the difference
-    ///  between lightest and heaviest bin is minimised.
+    /// between lightest and heaviest bin is minimised.
     ///
-    ///  The number of bins, pheromone evaporation rate, number of ants,
-    ///  and number of fitness evaluations for a single trial are assigned here.
-    ///  Algorithm inputs are intialised and a construction graph to hold the
-    ///  pheromone is created.
+    /// The number of bins, pheromone evaporation rate, number of ants,
+    /// and number of fitness evaluations for a single trial are assigned here.
+    /// Algorithm inputs are intialised and a construction graph to hold the
+    /// pheromone is created.
     ///
-    ///  When the algorithm has terminated the best fitness is reported to the user.
+    /// When the algorithm has terminated the best fitness is reported to the user.
     /// </summary>
     /// 
     /// <author>640010970</author>
@@ -43,6 +44,9 @@ namespace AntColonyBinPacking
         /// <see cref="ACO"/>
         public static void Main(string[] args)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             List<double> inputItems = new List<double>();
             // Initiliase the input items, setting their weights appropriately according to the BinProblemsEnum
             ACOHelper.InitialiseInputItems(inputItems, (int)BinProblemsEnum.BPP1);
@@ -64,12 +68,13 @@ namespace AntColonyBinPacking
             {
                 // Create ants and their paths
                 ants = ACOHelper.InitialiseAnts(ANT_PATHS, binGraph, BIN_AMOUNT, inputItems);
-                // Update the graph pheromones
                 binGraph.UpdatePheromones(ants, EVAPORATION_RATE);
                 loopCounter++;
             }
 
+            stopwatch.Stop();
             Console.WriteLine("Best Fitness: {0}", AntMaths.ReturnBestFitness(ants));
+            Console.WriteLine("Trial took: {0}", stopwatch.Elapsed.ToString());
             Console.ReadLine();  //Ensures the terminal window remains open.
         }
     }
