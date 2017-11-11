@@ -58,5 +58,22 @@ namespace AntColonyBinPacking.ACO.ACOCommon
             }
             return min;
         }
+
+        /// <summary>
+        /// Finds the average fitness in a population of ants.
+        /// </summary>
+        /// <param name="ants">A population of ants</param>
+        /// <returns>A double representing the average fitness</returns>
+        /// <version>1.0.0</version>
+        /// <see cref="ACO.Ant"/>
+        public static double ReturnAverageFitness(HashSet<Ant> ants)
+        {
+            double sum = 0;
+            foreach(Ant ant in ants)
+            {
+                sum += ant.AntFitness;
+            }
+            return sum / ants.Count;
+        }
     }
 }

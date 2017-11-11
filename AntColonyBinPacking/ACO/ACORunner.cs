@@ -71,9 +71,22 @@ namespace AntColonyBinPacking
                 binGraph.UpdatePheromones(ants, EVAPORATION_RATE);
                 loopCounter++;
             }
+            double bestFitness = AntMaths.ReturnBestFitness(ants);
+            double averageFitness = AntMaths.ReturnAverageFitness(ants);
+            TrialOutput(stopwatch, bestFitness, averageFitness);
+        }
 
+        /// <summary>
+        /// Outputs the results of a trial
+        /// </summary>
+        /// <param name="stopwatch">The timer for a trial</param>
+        /// <param name="bestFitness">The best fitness in the population</param>
+        /// <param name="averageFitness">The average fitness of the population</param>
+        /// <version>1.0.0</version>
+        private static void TrialOutput(Stopwatch stopwatch, double bestFitness, double averageFitness)
+        {
             stopwatch.Stop();
-            Console.WriteLine("Best Fitness: {0}", AntMaths.ReturnBestFitness(ants));
+            Console.WriteLine("Best Fitness: {0}", bestFitness);
             Console.WriteLine("Trial took: {0}", stopwatch.Elapsed.ToString());
             Console.ReadLine();  //Ensures the terminal window remains open.
         }
