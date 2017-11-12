@@ -71,24 +71,35 @@ namespace AntColonyBinPacking
                 binGraph.UpdatePheromones(ants, EVAPORATION_RATE);
                 loopCounter++;
             }
-            double bestFitness = AntMaths.ReturnBestFitness(ants);
-            double averageFitness = AntMaths.ReturnAverageFitness(ants);
-            TrialOutput(stopwatch, bestFitness, averageFitness);
+            
+            TrialOutput(stopwatch, ants);
         }
 
         /// <summary>
-        /// Outputs the results of a trial
+        /// Calculates and outputs the results of a trial
         /// </summary>
         /// <param name="stopwatch">The timer for a trial</param>
         /// <param name="bestFitness">The best fitness in the population</param>
         /// <param name="averageFitness">The average fitness of the population</param>
         /// <version>1.0.0</version>
-        private static void TrialOutput(Stopwatch stopwatch, double bestFitness, double averageFitness)
+        /// <see cref="ACO.ACOCommon.AntMaths.ReturnBestFitness(HashSet{Ant})"/>
+        /// <see cref="ACO.ACOCommon.AntMaths.PHEROMONE_UPDATE_CONSTANT"/>
+        /// <see cref="ACO.ACOCommon.AntMaths.ReturnAverageFitness(HashSet{Ant})"/>
+        /// <see cref="ACO.ACOCommon.AntMaths.ReturnFitnessVariance(HashSet{Ant}, double)"/>
+        private static void TrialOutput(Stopwatch stopwatch, HashSet<Ant> ants)
         {
+            double bestFitness = AntMaths.ReturnBestFitness(ants);
+            double averageFitness = AntMaths.ReturnAverageFitness(ants);
+            double fitnessVariance = AntMaths.ReturnFitnessVariance(ants, averageFitness);
+
             stopwatch.Stop();
             Console.WriteLine("Best Fitness: {0}", bestFitness);
+            Console.WriteLine("Average Fitness: {0}", averageFitness);
+            Console.WriteLine("Fitness Variance: {0}", fitnessVariance);
+            // Sqrt of variance gives standard deviation
+            Console.WriteLine("Fitness Standard Deviation: {0}", Math.Sqrt(fitnessVariance));
             Console.WriteLine("Trial took: {0}", stopwatch.Elapsed.ToString());
-            Console.ReadLine();  //Ensures the terminal window remains open.
+            Console.ReadLine();  // Ensures the terminal window remains open.
         }
     }
 }

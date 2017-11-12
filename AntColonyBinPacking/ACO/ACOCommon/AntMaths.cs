@@ -75,5 +75,23 @@ namespace AntColonyBinPacking.ACO.ACOCommon
             }
             return sum / ants.Count;
         }
+
+        /// <summary>
+        /// A method to find the variance of a populations fitnesses
+        /// </summary>
+        /// <param name="ants">The population of ants</param>
+        /// <param name="mean">The average fitness of the population</param>
+        /// <returns>A double representing the variance</returns>
+        /// <version>1.0.0</version>
+        /// <see cref="ACO.Ant"/>
+        public static double ReturnFitnessVariance(HashSet<Ant> ants, double mean)
+        {
+            double squaredDifferences = 0;
+            foreach(Ant ant in ants)
+            {
+                squaredDifferences += Math.Pow((ant.AntFitness - mean), 2);
+            }
+            return squaredDifferences / ants.Count;
+        }
     }
 }
