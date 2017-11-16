@@ -77,7 +77,6 @@ namespace AntColonyBinPacking.ACO
                 foreach(Edge edge in edges)
                 {
                     // Multiply pheromone by the evaporation coeffcient as denoted in the specification.
-                    // It would seem other sources recommend multiplying by 1 - the coefficient however.
                     edge.PheromoneValue *= evaporationRate;  
                 }
             }

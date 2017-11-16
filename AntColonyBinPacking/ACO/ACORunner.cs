@@ -13,8 +13,8 @@ namespace AntColonyBinPacking
 {
     /// <summary>
     /// The main runner class for the Ant Colony Optimisation
-    /// of the Bin Packing Problem.Items of different weights
-    /// are inputted into the algorithm and ants help to distribute
+    /// of the Bin Packing Problem. Items of different weights
+    /// are input into the algorithm and ants help to distribute
     /// these items into a fixed number of bins so that the difference
     /// between lightest and heaviest bin is minimised.
     ///
@@ -23,7 +23,8 @@ namespace AntColonyBinPacking
     /// Algorithm inputs are intialised and a construction graph to hold the
     /// pheromone is created.
     ///
-    /// When the algorithm has terminated the best fitness is reported to the user.
+    /// When the algorithm has terminated the best fitness, average, variance
+    /// and S.D is reported to the user.
     /// </summary>
     /// 
     /// <author>640010970</author>
@@ -82,10 +83,7 @@ namespace AntColonyBinPacking
         /// <param name="bestFitness">The best fitness in the population</param>
         /// <param name="averageFitness">The average fitness of the population</param>
         /// <version>1.0.0</version>
-        /// <see cref="ACO.ACOCommon.AntMaths.ReturnBestFitness(HashSet{Ant})"/>
-        /// <see cref="ACO.ACOCommon.AntMaths.PHEROMONE_UPDATE_CONSTANT"/>
-        /// <see cref="ACO.ACOCommon.AntMaths.ReturnAverageFitness(HashSet{Ant})"/>
-        /// <see cref="ACO.ACOCommon.AntMaths.ReturnFitnessVariance(HashSet{Ant}, double)"/>
+        /// <see cref="ACO.ACOCommon.AntMaths"/> 
         private static void TrialOutput(Stopwatch stopwatch, HashSet<Ant> ants)
         {
             double bestFitness = AntMaths.ReturnBestFitness(ants);
