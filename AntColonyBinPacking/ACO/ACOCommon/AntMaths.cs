@@ -24,8 +24,7 @@ namespace AntColonyBinPacking.ACO.ACOCommon
         /// <version>1.0.0</version>
         public static double GenerateRandomDouble(Random random)
         {
-            double rand = random.Next();        // Generates a random double
-            return 1 - (rand / int.MaxValue);
+            return random.NextDouble();   // Generates a random double
         }
 
         /// <summary>
@@ -53,7 +52,6 @@ namespace AntColonyBinPacking.ACO.ACOCommon
             foreach(Ant ant in ants)
             {
                 double fitness = ant.AntFitness;
-                // If the fitness is the smallest we have encountered, then the minimum is now that fitness
                 if (fitness < min) min = fitness;
             }
             return min;

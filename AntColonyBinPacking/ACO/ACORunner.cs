@@ -34,7 +34,7 @@ namespace AntColonyBinPacking
     {
         public static readonly int BIN_AMOUNT = 10;                       // The number of bins to place items into
         public static readonly double EVAPORATION_RATE = 0.9;             // The rate of evaporation for pheromone
-        public static readonly int ANT_PATHS = 100;                       // The number of ant paths to generate
+        public static readonly int ANT_PATHS = 10;                       // The number of ant paths to generate
         public static readonly int FITNESS_EVALUATIONS_LIMIT = 10000;     // The number of single fitness evaluations to carry out in a trial
 
         /// <summary>
