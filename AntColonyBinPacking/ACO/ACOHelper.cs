@@ -81,7 +81,6 @@ namespace AntColonyBinPacking.ACO
         {
             // Create an edge structure where each sublist represents a single ant decision
             List<List<Edge>> edges = new List<List<Edge>>();
-            // Random constructor takes the seed from the current time, so will be different for each trial
             Random pheremoneGen = new Random();           
             PopulateEdges(edges, inputCount, binNumber, pheremoneGen);
             return edges;

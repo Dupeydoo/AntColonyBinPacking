@@ -34,7 +34,7 @@ namespace AntColonyBinPacking
     {
         public static readonly int BIN_AMOUNT = 10;                       // The number of bins to place items into
         public static readonly double EVAPORATION_RATE = 0.9;             // The rate of evaporation for pheromone
-        public static readonly int ANT_PATHS = 10;                        // The number of ant paths to generate
+        public static readonly int ANT_PATHS = 100;                       // The number of ant paths to generate
         public static readonly int FITNESS_EVALUATIONS_LIMIT = 10000;     // The number of single fitness evaluations to carry out in a trial
 
         /// <summary>
@@ -49,12 +49,11 @@ namespace AntColonyBinPacking
             stopwatch.Start();
 
             List<double> inputItems = new List<double>();
-            // Initiliase the input items, setting their weights appropriately according to the BinProblemsEnum
             ACOHelper.InitialiseInputItems(inputItems, (int)BinProblemsEnum.BPP1);
             // Create a structure of edges based on bin amount and input items. Each List<Edge> represents a single ant decision.
             List<List<Edge>> edges = ACOHelper.InitialiseEdges(inputItems.Count, BIN_AMOUNT);
             HashSet<Ant> ants = new HashSet<Ant>();
-            int loopCounter = 1;
+            int generation = 1;
 
             // Create the construction graph with dependency injection
             IConstructionGraph binGraph = new ConstructionGraph
@@ -65,12 +64,11 @@ namespace AntColonyBinPacking
             };
 
             // Main ACO while loop. Must carry out a fixed amount of fitness evaluations with varying Ant Paths
-            while(loopCounter <= (FITNESS_EVALUATIONS_LIMIT / ANT_PATHS))
+            while(generation <= (FITNESS_EVALUATIONS_LIMIT / ANT_PATHS))
             {
-                // Create ants and their paths
                 ants = ACOHelper.InitialiseAnts(ANT_PATHS, binGraph, BIN_AMOUNT, inputItems);
                 binGraph.UpdatePheromones(ants, EVAPORATION_RATE);
-                loopCounter++;
+                generation++;
             }
             
             TrialOutput(stopwatch, ants);
