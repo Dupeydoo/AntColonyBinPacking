@@ -57,12 +57,12 @@ namespace AntColonyBinPacking.ACO
         /// <version>1.5.0</version>
         /// <see cref="ACOHelper.PopulateAnts(int, Random, HashSet{Ant}, List{double}, IConstructionGraph)"/>
         /// <see cref="ACO.Ant"/>
-        internal static HashSet<Ant> InitialiseAnts(int antPaths, IConstructionGraph graph, int binNumber, List<double> inputItems)
+        internal static HashSet<Ant> InitialiseAnts(int antPaths, IConstructionGraph graph, int binNumber, List<double> inputItems,
+            Random random)
         {
             // Hashsets are faster, but care not for order
             HashSet<Ant> ants = new HashSet<Ant>();
             // Random constructor takes the seed from the current time, so will be different for each trial
-            Random random = new Random();
             PopulateAnts(antPaths, random, ants, inputItems, graph);
             return ants;
         }
@@ -77,11 +77,10 @@ namespace AntColonyBinPacking.ACO
         /// <version>2.0.0</version>
         /// <see cref="ACOHelper.PopulateEdges(List{List{Edge}}, int, int, Random)"/>
         /// <see cref="ACO.Edge"/>
-        internal static List<List<Edge>> InitialiseEdges(int inputCount, int binNumber)
+        internal static List<List<Edge>> InitialiseEdges(int inputCount, int binNumber, Random pheremoneGen)
         {
             // Create an edge structure where each sublist represents a single ant decision
-            List<List<Edge>> edges = new List<List<Edge>>();
-            Random pheremoneGen = new Random();           
+            List<List<Edge>> edges = new List<List<Edge>>();          
             PopulateEdges(edges, inputCount, binNumber, pheremoneGen);
             return edges;
         }

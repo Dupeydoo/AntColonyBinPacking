@@ -33,9 +33,10 @@ namespace AntColonyBinPacking
     class ACORunner
     {
         public static readonly int BIN_AMOUNT = 10;                       // The number of bins to place items into
-        public static readonly double EVAPORATION_RATE = 0.9;             // The rate of evaporation for pheromone
-        public static readonly int ANT_PATHS = 10;                       // The number of ant paths to generate
+        public static readonly double EVAPORATION_RATE = 0.6;             // The rate of evaporation for pheromone
+        public static readonly int ANT_PATHS = 10;                        // The number of ant paths to generate
         public static readonly int FITNESS_EVALUATIONS_LIMIT = 10000;     // The number of single fitness evaluations to carry out in a trial
+        public static readonly Random random = new Random();
 
         /// <summary>
         /// The main method for running the ACO.
@@ -51,7 +52,7 @@ namespace AntColonyBinPacking
             List<double> inputItems = new List<double>();
             ACOHelper.InitialiseInputItems(inputItems, (int)BinProblemsEnum.BPP1);
             // Create a structure of edges based on bin amount and input items. Each List<Edge> represents a single ant decision.
-            List<List<Edge>> edges = ACOHelper.InitialiseEdges(inputItems.Count, BIN_AMOUNT);
+            List<List<Edge>> edges = ACOHelper.InitialiseEdges(inputItems.Count, BIN_AMOUNT, random);
             HashSet<Ant> ants = new HashSet<Ant>();
             int generation = 1;
 
@@ -66,7 +67,7 @@ namespace AntColonyBinPacking
             // Main ACO while loop. Must carry out a fixed amount of fitness evaluations with varying Ant Paths
             while(generation <= (FITNESS_EVALUATIONS_LIMIT / ANT_PATHS))
             {
-                ants = ACOHelper.InitialiseAnts(ANT_PATHS, binGraph, BIN_AMOUNT, inputItems);
+                ants = ACOHelper.InitialiseAnts(ANT_PATHS, binGraph, BIN_AMOUNT, inputItems, random);
                 binGraph.UpdatePheromones(ants, EVAPORATION_RATE);
                 generation++;
             }
