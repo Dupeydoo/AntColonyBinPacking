@@ -50,7 +50,7 @@ namespace AntColonyBinPacking
             stopwatch.Start();
 
             List<double> inputItems = new List<double>();
-            ACOHelper.InitialiseInputItems(inputItems, (int)BinProblemsEnum.BPP1);
+            ACOHelper.InitialiseInputItems(inputItems, (int)BinProblemsEnum.BPP1);   // Change BPP1 to BPP2 when wanting to use BPP2 items.
             // Create a structure of edges based on bin amount and input items. Each List<Edge> represents a single ant decision.
             List<List<Edge>> edges = ACOHelper.InitialiseEdges(inputItems.Count, BIN_AMOUNT, random);
             HashSet<Ant> ants = new HashSet<Ant>();
