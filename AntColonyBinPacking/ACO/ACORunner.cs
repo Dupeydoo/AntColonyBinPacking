@@ -36,7 +36,7 @@ namespace AntColonyBinPacking
         public static readonly double EVAPORATION_RATE = 0.6;             // The rate of evaporation for pheromone
         public static readonly int ANT_PATHS = 10;                        // The number of ant paths to generate
         public static readonly int FITNESS_EVALUATIONS_LIMIT = 10000;     // The number of single fitness evaluations to carry out in a trial
-        public static readonly Random random = new Random();
+        public static readonly Random random = new Random();              // A single random object for each trial, seed comes from current time
 
         /// <summary>
         /// The main method for running the ACO.

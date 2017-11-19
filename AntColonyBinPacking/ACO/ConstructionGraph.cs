@@ -43,8 +43,7 @@ namespace AntColonyBinPacking.ACO
         /// <param name="evaporationRate">The evaporation coefficient for pheromone evaporation</param>
         /// <version>2.0.0</version>
         /// <see cref="ACO.ConstructionGraph.EvaporatePheromones(double)"/>
-        /// <see cref="ACO.ACOCommon.AntMaths.CalculatePheromoneLay(double, double)"/>
-        /// <see cref="ACO.ACOCommon.AntMaths.PHEROMONE_UPDATE_CONSTANT"/>
+        /// <see cref="ACO.ACOCommon"/>
         /// <see cref="ACO.Ant"/>
         public void UpdatePheromones(HashSet<Ant> ants, double evaporationRate)
         {

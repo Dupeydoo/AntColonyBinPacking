@@ -35,7 +35,6 @@ namespace AntColonyBinPacking.ACO
             {
                 // Create a new decision list
                 List<Edge> decision = new List<Edge>();
-                // For each bin
                 for (int binCount = 1; binCount <= binNumber; binCount++)
                 {
                     decision.Add
@@ -66,9 +65,6 @@ namespace AntColonyBinPacking.ACO
         /// <see cref="ACO.Ant"/>
         /// <see cref="ACO.Edge"/>
         /// <see cref="ACO.Interfaces.IConstructionGraph"/>
-        /// <see cref="ACO.Interfaces.IConstructionGraph.ClearBinWeights"/>
-        /// <see cref="ACO.Ant.MakeChoice(List{Edge}, Random, double, double[])"/>
-        /// <see cref="ACO.Ant.CalculateAntFitness(double[])"/>
         private static void PopulateAnts(int antPaths, Random random,
             HashSet<Ant> ants, List<double> inputItems, IConstructionGraph graph)
         {
